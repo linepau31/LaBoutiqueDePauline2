@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte - La Boutique De Pauline{% endblock %}
+
+{% block content %}
+
+    <h1>Mon compte</h1>
+
+    Bienvenue {{ app.user.firstname }} dans votre compte
+    <hr>
+    - <a href="{{ path('account_password') }}">Modifier mon mdp </a><br>
+    -Ajouter mesadresses <br>
+    -Mes commandes<br>
+    <hr>
+
+{% endblock %}
