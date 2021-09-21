@@ -53,7 +53,7 @@ body {
 }
 
 .form-check {
-    background-color: #abdde5;
+    background-color: lightblue;
     padding: 20px 65px;
     margin-top: 10px ;
 }
@@ -63,7 +63,7 @@ body {
 }
 
 .order-summary {
-    background-color: #abdde5;
+    background-color: lightblue;
     padding: 20px;
     margin-top: 20px;
 }
