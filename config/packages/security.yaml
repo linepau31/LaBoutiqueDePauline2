@@ -38,3 +38,4 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN } # role admin pour accéder à l'url admin USER
         - { path: ^/compte, roles: ROLE_USER }
+        - { path: ^/commande, roles: ROLE_USER }

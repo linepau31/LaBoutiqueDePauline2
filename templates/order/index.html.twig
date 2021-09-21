@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valider ma commande - La Boutique De Pauline{% endblock %}
+
+{% block content %}
+
+    <h2>Passer la commande</h2>
+    <p>Choisissez vos préférences avant de passer votre commande sur La Boutique De Pauline</p>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            {% set formHtml %}
+            {{ form(form) }}
+            {% endset %}
+
+            {{ formHtml|replace({'[br]' : '<br>'})|raw }}
+            <b>Choisir mon transporteur</b>
+        </div>
+        <div class="col-md-6">
+            <b>Récapitulatif de ma commande</b><br>
+            <b>btn pour payer</b>
+        </div>
+    </div>
+
+{% endblock %}
