@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\AdressRepository;
+use App\Repository\AddressRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=AdressRepository::class)
+ * @ORM\Entity(repositoryClass=AddressRepository::class)
  */
-class Adress
+class Address
 {
     /**
      * @ORM\Id
@@ -18,7 +18,7 @@ class Adress
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="adresses")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="addresses")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
