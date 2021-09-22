@@ -11,7 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 class OrderController extends AbstractController
 {
@@ -40,6 +39,9 @@ class OrderController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws \Stripe\Exception\ApiErrorException
+     */
     #[Route('/commande/recapitulatif', name: 'order_recap', methods: "POST")]
     public function add(Cart $cart, Request $request): Response
     {
@@ -85,8 +87,10 @@ class OrderController extends AbstractController
                 $orderDetails->setPrice($product['product']->getPrice());
                 $orderDetails->setTotal($product['product']->getPrice() * $product['quantity']);
                 $this->entityManager->persist($orderDetails);
+
             }
-            $this->entityManager->flush();
+
+            //$this->entityManager->flush();
 
             return $this->render('order/add.html.twig', [
                 'cart' => $cart->getFull(),
