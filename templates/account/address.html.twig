@@ -12,7 +12,7 @@
     {% if app.user.addresses|length == 0 %}
         <p class="text-left">
             Vous n'avez pas encore ajouté d'adresse dans votre compte client. <br>
-            Pour en ajouter une, veuillez <a href="">Cliquer ici</a>
+            Pour en ajouter une, veuillez <a href="{{ path('account_address_add') }}">Cliquer ici</a>
         </p>
     {% else %}
         <div class="row">
