@@ -49,7 +49,7 @@ class OrderCrudController extends AbstractCrudController
     public function updatePreparation(AdminContext $context): \Symfony\Component\HttpFoundation\RedirectResponse
     {
         $order = $context->getEntity()->getInstance();
-        $order->setState(2);
+        $order->setState(2); // Préparation en cours
         $this->entityManager->flush();
 
         $this->addFlash('notice', "<span style='color: green;'><strong>La commande ".$order->getReference()." est en <u>cours de préparation</u>.</strong></span>");
@@ -69,7 +69,7 @@ class OrderCrudController extends AbstractCrudController
     public function updateDelivery(AdminContext $context): \Symfony\Component\HttpFoundation\RedirectResponse
     {
         $order = $context->getEntity()->getInstance();
-        $order->setState(3);
+        $order->setState(3); // en cours de livraison
         $this->entityManager->flush();
 
         $this->addFlash('notice', "<span style='color: green;'><strong>La commande ".$order->getReference()." est en <u>cours de livraison</u>.</strong></span>");
