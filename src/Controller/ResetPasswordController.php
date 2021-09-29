@@ -81,7 +81,6 @@ class ResetPasswordController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $new_pwd = $form->get('new_password')->getData();
-            dd($new_pwd);
 
             //encodage des mdp
             $password = $encoder->hashPassword($reset_password->getUser(), $new_pwd);

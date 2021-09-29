@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Classe\Mail;
+
 use App\Entity\Order;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -46,7 +46,7 @@ class OrderCrudController extends AbstractCrudController
             ->add('index', 'detail');
     }
 
-    public function updatePreparation(AdminContext $context): \Symfony\Component\HttpFoundation\RedirectResponse
+    public function updatePreparation(AdminContext $context)
     {
         $order = $context->getEntity()->getInstance();
         $order->setState(2); // Préparation en cours
@@ -66,7 +66,7 @@ class OrderCrudController extends AbstractCrudController
         return $this->redirect($url);
     }
 
-    public function updateDelivery(AdminContext $context): \Symfony\Component\HttpFoundation\RedirectResponse
+    public function updateDelivery(AdminContext $context)
     {
         $order = $context->getEntity()->getInstance();
         $order->setState(3); // en cours de livraison

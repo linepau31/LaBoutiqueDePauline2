@@ -7,8 +7,8 @@ use Mailjet\Resources;
 
 class Mail
 {
-    private string $api_key = '0a6d94cc6f396f5248bb93d23ac2580f';
-    private string $api_key_secret = 'd26fa9a16aabda2af3fd5e3a7a4a70bf';
+    private string $api_key = '230e826c3898b680c0f3459378153691';
+    private string $api_key_secret = '68072df0bef31647c1e7cf1846287d53';
 
     public function send($to_email, $to_name, $subject, $content)
     {
@@ -17,7 +17,7 @@ class Mail
             'Messages' => [
                 [
                     'From' => [
-                        'Email' => "pauline.marot2@outlook.fr",
+                        'Email' => "linepaumarot@gmail.com",
                         'Name' => "La Boutique De Pauline"
                     ],
                     'To' => [
@@ -26,7 +26,7 @@ class Mail
                             'Name' => $to_name
                         ]
                     ],
-                    'TemplateID' => 3195571,
+                    'TemplateID' => 3211930,
                     'TemplateLanguage' => true,
                     'Subject' => $subject,
                     'Variables' => [
