@@ -46,7 +46,7 @@ class OrderCrudController extends AbstractCrudController
             ->add('index', 'detail');
     }
 
-    public function updatePreparation(AdminContext $context)
+    public function updatePreparation(AdminContext $context): \Symfony\Component\HttpFoundation\RedirectResponse
     {
         $order = $context->getEntity()->getInstance();
         $order->setState(2); // Préparation en cours
@@ -66,7 +66,7 @@ class OrderCrudController extends AbstractCrudController
         return $this->redirect($url);
     }
 
-    public function updateDelivery(AdminContext $context)
+    public function updateDelivery(AdminContext $context): \Symfony\Component\HttpFoundation\RedirectResponse
     {
         $order = $context->getEntity()->getInstance();
         $order->setState(3); // en cours de livraison

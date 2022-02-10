@@ -28,7 +28,7 @@ class OrderSuccessController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        if (!$order->getState () == 0) {
+        if ($order->getState () == 0) {
             // vider la session "Cart"
             $cart->remove();
 

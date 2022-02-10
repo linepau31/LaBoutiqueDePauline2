@@ -37,11 +37,11 @@ class RegisterController extends AbstractController
             $search_email = $this->entityManager->getRepository(User::class)->findOneByEmail($user->getEmail());
 
             if (!$search_email) {
-                $password = $encoder->hashPassword($user, $user->getPassword()); # mdp crypter
+                $password = $encoder->hashPassword($user, $user->getPassword()); // mdp crypter
                 $user->setPassword($password);
 
                 $this->entityManager->persist($user);
-                $this->entityManager->flush(); # éxecute la persistance, data (l'objet figé) = enregistre bdd
+                $this->entityManager->flush(); // éxecute la persistance, data (l'objet figé) = enregistre bdd
 
                 $mail = new Mail();
                 $content = "Bonjour".$user->getFirstname()."<br/>Bienvenue sur la boutique dédiée a 100% Made in France.<br/><br/>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.";
