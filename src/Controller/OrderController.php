@@ -11,7 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 class OrderController extends AbstractController
 {
@@ -40,6 +39,9 @@ class OrderController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws \Stripe\Exception\ApiErrorException
+     */
     #[Route('/commande/recapitulatif', name: 'order_recap', methods: "POST")]
     public function add(Cart $cart, Request $request): Response
     {
@@ -53,7 +55,7 @@ class OrderController extends AbstractController
             $date = new \DateTimeImmutable();
             $carriers = $form->get('carriers')->getData();
             $delivery = $form->get('addresses')->getData();
-            $delivery_content = $delivery->getFirstname().''.$delivery->getLastname();
+            $delivery_content = $delivery->getFirstname().' '.$delivery->getLastname();
             $delivery_content .= '<br/>'.$delivery->getPhone();
 
             if ($delivery->getCompany())
@@ -67,12 +69,19 @@ class OrderController extends AbstractController
 
                 /* enregistrer ma commande order */
             $order = new Order();
+            $reference = $date->format('dmy').'-'.uniqid();
+            $order->setReference($reference);
             $order->setUser($this->getUser());
             $order->setCreatedAt($date);
             $order->setCarrierName($carriers->getName());
             $order->setCarrierPrice($carriers->getPrice());
             $order->setDelivery($delivery_content);
-            $order->setIsPaid(0);
+            $order->setState(0);
+            // statue de la commande
+            // 0 non validée
+            // 1 payée
+            // 2 préparation en cours
+            //3 livraison en cours
 
             $this->entityManager->persist($order);
 
@@ -85,13 +94,16 @@ class OrderController extends AbstractController
                 $orderDetails->setPrice($product['product']->getPrice());
                 $orderDetails->setTotal($product['product']->getPrice() * $product['quantity']);
                 $this->entityManager->persist($orderDetails);
+
             }
+
             $this->entityManager->flush();
 
             return $this->render('order/add.html.twig', [
                 'cart' => $cart->getFull(),
                 'carrier' => $carriers,
-                'delivery' => $delivery_content
+                'delivery' => $delivery_content,
+                'reference' => $order->getReference()
             ]);
         }
 
